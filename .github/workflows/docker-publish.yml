@@ -73,3 +73,16 @@ jobs:
             ghcr.io/ssssizn/ci-cd-practice:${{ github.sha }}
             ghcr.io/ssssizn/ci-cd-practice:${{ env.SHORT_SHA }}
 
+  # -------------------------------------------------
+  # 3. Send Notification (Webhook)
+  # -------------------------------------------------
+  notify:
+    needs: [test, build-and-push]  # 依赖 test 和 build-and-push
+    runs-on: ubuntu-latest
+    if: always()  # 确保无论构建成功或失败，都发送通知
+    steps:
+      - name: Send Notification to DingTalk
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+            -d '{"msgtype": "text", "text": {"content": "GitHub Actions Build Result: ${{ job.status }}\nCommit: ${{ github.sha }}\nBranch: ${{ github.ref }}"}}' \
+            ${{ secrets.DINGTALK_WEBHOOK_URL }}
