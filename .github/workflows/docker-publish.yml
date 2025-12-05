@@ -83,6 +83,12 @@ jobs:
     steps:
       - name: Send Notification to DingTalk
         run: |
+          echo "Sending notification to DingTalk..."
+          echo "Webhook URL: ${{ secrets.DINGTALK_WEBHOOK_URL }}"
+          echo "Payload:"
+          echo '{"msgtype": "text", "text": {"content": "GitHub Actions Build Result: ${{ job.status }}\nCommit: ${{ github.sha }}\nBranch: ${{ github.ref }}"}}'
           curl -X POST -H "Content-Type: application/json" \
             -d '{"msgtype": "text", "text": {"content": "GitHub Actions Build Result: ${{ job.status }}\nCommit: ${{ github.sha }}\nBranch: ${{ github.ref }}"}}' \
             ${{ secrets.DINGTALK_WEBHOOK_URL }}
+          echo "Notification sent!"
+
