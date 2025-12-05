@@ -8,3 +8,7 @@ const server = http.createServer((req, res) => {
 server.listen(3000, () => {
   console.log('Server running on port 3000');
 });
+
+
+// 违反 no-unused-vars 规则：定义但未使用的变量
+const unusedVariable = 'This is an unused variable';
