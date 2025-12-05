@@ -5,5 +5,5 @@
     "test": "echo \"Error: no test specified\" && exit 0",
     "lint": "eslint . --fix"  
   },
-  "dependencies": {}
+  "dependencies": {"eslint": "^8.0.0"}
 }
