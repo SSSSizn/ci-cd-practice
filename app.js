@@ -10,5 +10,5 @@ server.listen(3000, () => {
 });
 
 
-// 违反 no-unused-vars 规则：定义但未使用的变量
-const unusedVariable = 'This is an unused variable';
+// 违反 no-console 规则：使用了 console.log()
+console.log('This is a log statement');
